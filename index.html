@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Neon Mind – Random Poster Generator Filosofis</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Playfair+Display:wght@700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Neon Theme Toggle -->
+  <div class="theme-toggle">
+    <button id="themeSwitcher" title="Ubah Tema">🌙</button>
+  </div>
+  
+  <main>
+    <h1 class="site-title">Neon Mind</h1>
+    <p class="site-desc">Random Poster Generator Filosofis<br>
+      <span class="subtitle">by Yahya</span>
+    </p>
+
+    <!-- Auto-Refresh -->
+    <div class="auto-refresh-control">
+      <label>
+        <input type="checkbox" id="autoRefreshToggle">
+        Auto-Refresh Poster tiap
+      </label>
+      <input type="number" id="autoRefreshInterval" value="10" min="3" max="120" style="width:50px;"> detik
+    </div>
+
+    <!-- Poster Card Box -->
+    <section class="poster-section">
+      <div class="poster-card" id="posterCard">
+        <div class="poster-bg" id="posterBg"></div>
+        <div class="poster-content" id="posterContent">
+          <blockquote id="quoteText">Hidup adalah perjalanan menemukan makna.</blockquote>
+          <span class="author" id="quoteAuthor">- Anonim</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sticker/Emoji Picker -->
+    <div class="sticker-editor">
+      <h3>Tambah Stiker/Emoji</h3>
+      <div id="stickerList">
+        <button class="sticker-btn">🌟</button>
+        <button class="sticker-btn">✨</button>
+        <button class="sticker-btn">🎶</button>
+        <button class="sticker-btn">🧠</button>
+        <button class="sticker-btn">🔥</button>
+        <button class="sticker-btn">💡</button>
+      </div>
+    </div>
+
+    <!-- Poster Controls -->
+    <div class="controls">
+      <button id="generateBtn" class="neon-btn" title="Buat Poster Acak">🔁 Generate Poster</button>
+      <button id="downloadBtn" class="neon-btn" title="Download Poster">💾 Download</button>
+      <button id="copyBtn" class="neon-btn" title="Salin Kutipan">📋 Copy Quote</button>
+      <button id="favoriteBtn" class="neon-btn" title="Simpan ke Favorit">⭐ Favorite</button>
+      <button id="shareBtn" class="neon-btn" title="Share">📤 Share</button>
+      <button id="resetBtn" class="neon-btn danger" title="Reset Semua">🧹 Reset</button>
+    </div>
+
+    <!-- Quote Input Section (Tambah Manual) -->
+    <section class="add-quote-section">
+      <h2>Tambah Quote Baru</h2>
+      <form id="addQuoteForm" autocomplete="off">
+        <input type="text" id="newQuote" placeholder="Tulis filosofi hidup..." required maxlength="120">
+        <input type="text" id="newAuthor" placeholder="Nama penulis (opsional)">
+        <button type="submit" class="neon-btn">➕ Tambah</button>
+      </form>
+    </section>
+
+    <!-- Font & Style Controls -->
+    <div class="font-style-controls">
+      <label for="fontSelect">Ganti Font:</label>
+      <select id="fontSelect">
+        <option value="poppins">Poppins</option>
+        <option value="playfair">Playfair Display</option>
+        <option value="spacegrotesk">Space Grotesk</option>
+      </select>
+    </div>
+
+    <!-- Custom Gradient -->
+    <div class="gradient-editor">
+      <h3>Custom Neon Gradient</h3>
+      <input type="color" id="gradient1" value="#a259ff">
+      <input type="color" id="gradient2" value="#00e6fe">
+      <input type="color" id="gradient3" value="#fd1fff">
+      <button id="applyGradient" class="neon-btn">Apply</button>
+    </div>
+
+    <!-- Quote Search -->
+    <div class="quote-search">
+      <input type="text" id="searchQuote" placeholder="Cari quote atau author...">
+      <button id="searchBtn" class="neon-btn">🔎 Cari</button>
+    </div>
+
+    <!-- Favorit List Preview + Export/Import -->
+    <section class="favorite-section">
+      <h2>Favoritku</h2>
+      <div class="fav-export-import">
+        <button id="exportFavBtn" class="neon-btn">⬇️ Export Favorit</button>
+        <input type="file" id="importFavInput" style="display:none;">
+        <button id="importFavBtn" class="neon-btn">⬆️ Import Favorit</button>
+      </div>
+      <ul id="favoriteList"></ul>
+    </section>
+
+    <!-- History Poster -->
+    <section class="history-section">
+      <h2>Riwayat Poster</h2>
+      <div id="posterHistory" class="poster-history-grid"></div>
+    </section>
+
+    <!-- QR Code Generator -->
+    <div class="qr-generator">
+      <button id="generateQRBtn" class="neon-btn">🔗 QR Code Poster</button>
+      <div id="qrPreview" style="margin-top:10px;"></div>
+    </div>
+
+    <!-- Audio BG Control -->
+    <div class="audio-control">
+      <label>
+        <input type="checkbox" id="audioBgToggle">
+        Background Music
+      </label>
+      <audio id="audioBg" loop src="lofi-neon.mp3"></audio>
+    </div>
+  </main>
+
+  <!-- Instant Chat Box -->
+  <div class="instant-chat" id="instantChat">
+    <div class="chat-header">
+      <span>🗨️ Instant Chat</span>
+      <button id="closeChat" title="Tutup Chat">×</button>
+    </div>
+    <div class="chat-body" id="chatBody">
+      <div class="chat-msg bot">Halo! Ada yang bisa dibantu? 😊</div>
+    </div>
+    <form class="chat-form" id="chatForm" autocomplete="off">
+      <input type="text" id="chatInput" placeholder="Ketik pesan..." required maxlength="120"/>
+      <button type="submit">Kirim</button>
+    </form>
+  </div>
+  <button class="chat-fab" id="openChat" title="Buka Chat">💬</button>
+
+  <!-- Sound Effect (audio tag, preload, hidden) -->
+  <audio id="clickSound" src="neon-click.mp3" preload="auto"></audio>
+
+  <!-- Script -->
+  <script src="script.js"></script>
+</body>
+</html>
